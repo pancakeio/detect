@@ -16,7 +16,7 @@ var StaticSites = map[string]*StaticSiteType{
 	"jekyll": {
 		Name:    "jekyll",
 		Canary:  "_config.yml",
-		Command: "touch Gemfile && bundle install && jekyll build --source $PANCAKE_SOURCE --destination $PANCAKE_ARTIFACT_DIR",
+		Command: "touch Gemfile && bundle install && bundle exec jekyll build --source $PANCAKE_SOURCE --destination $PANCAKE_ARTIFACT_DIR",
 	},
 	"pelican": {
 		Name:    "pelican",
