@@ -31,7 +31,7 @@ var StaticSites = map[string]*StaticSiteType{
 	"middleman": {
 		Name:    "middleman",
 		Canary:  "config.rb",
-		Command: "middleman build && cp -r $PANCAKE_SOURCE/build/* $PANCAKE_ARTIFACT_DIR/",
+		Command: "touch Gemfile && bundle install && bundle exec middleman build && cp -vXR $PANCAKE_SOURCE/build/* $PANCAKE_ARTIFACT_DIR/",
 	},
 	"hyde": {
 		Name:    "hyde",
