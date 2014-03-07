@@ -9,7 +9,7 @@ type StaticSiteType struct {
 
 var DefaultBuild = &StaticSiteType{
 	Name:    "html",
-	Command: "cp -vXR $PANCAKE_SOURCE/* $PANCAKE_ARTIFACT_DIR",
+	Command: "cp -vLR $PANCAKE_SOURCE/* $PANCAKE_ARTIFACT_DIR",
 }
 
 var StaticSites = map[string]*StaticSiteType{
@@ -31,7 +31,7 @@ var StaticSites = map[string]*StaticSiteType{
 	"middleman": {
 		Name:    "middleman",
 		Canary:  "config.rb",
-		Command: "touch Gemfile && bundle install && bundle exec middleman build && cp -vXR $PANCAKE_SOURCE/build/* $PANCAKE_ARTIFACT_DIR/",
+		Command: "touch Gemfile && bundle install && bundle exec middleman build && cp -vLR $PANCAKE_SOURCE/build/* $PANCAKE_ARTIFACT_DIR/",
 	},
 	"hyde": {
 		Name:    "hyde",
