@@ -14,9 +14,10 @@ var DefaultBuild = &StaticSiteType{
 
 var StaticSites = map[string]*StaticSiteType{
 	"jekyll": {
-		Name:    "jekyll",
-		Canary:  "_config.yml",
-		Command: "touch Gemfile && bundle install && bundle exec jekyll build --source $PANCAKE_SOURCE --destination $PANCAKE_ARTIFACT_DIR",
+		Name:   "jekyll",
+		Canary: "_config.yml",
+		Command: gemfile("jekyll") +
+			" && bundle exec jekyll build --source $PANCAKE_SOURCE --destination $PANCAKE_ARTIFACT_DIR",
 	},
 	"pelican": {
 		Name:    "pelican",
@@ -29,9 +30,10 @@ var StaticSites = map[string]*StaticSiteType{
 		Command: "npm install && wintersmith build -C $PANCAKE_SOURCE -o $PANCAKE_ARTIFACT_DIR",
 	},
 	"middleman": {
-		Name:    "middleman",
-		Canary:  "config.rb",
-		Command: "touch Gemfile && bundle install && bundle exec middleman build && cp -vLR $PANCAKE_SOURCE/build/* $PANCAKE_ARTIFACT_DIR/",
+		Name:   "middleman",
+		Canary: "config.rb",
+		Command: gemfile("middleman") +
+			" && bundle exec middleman build && cp -vLR $PANCAKE_SOURCE/build/* $PANCAKE_ARTIFACT_DIR/",
 	},
 	"hyde": {
 		Name:    "hyde",
@@ -43,4 +45,9 @@ var StaticSites = map[string]*StaticSiteType{
 		Canary:  "conf.py",
 		Command: "sphinx-build -b html $PANCAKE_SOURCE $PANCAKE_ARTIFACT_DIR",
 	},
+}
+
+func gemfile(gem string) string {
+	return `if [ ! -e Gemfile ]; then echo "gem '` + gem + `'" >> Gemfile ; fi` +
+		` && bundle install`
 }
