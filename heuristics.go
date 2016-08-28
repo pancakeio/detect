@@ -45,6 +45,11 @@ var StaticSites = map[string]*StaticSiteType{
 		Canary:  "conf.py",
 		Command: "sphinx-build -b html $PANCAKE_SOURCE $PANCAKE_ARTIFACT_DIR",
 	},
+	"harp": {
+		Name:    "harp",
+		Canary:  "harp.json",
+		Command: "npm install && harp compile $PANCAKE_SOURCE $PANCAKE_ARTIFACT_DIR",
+	}
 }
 
 func gemfile(gem string) string {
