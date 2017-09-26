@@ -45,6 +45,11 @@ var StaticSites = map[string]*StaticSiteType{
 		Canary:  "conf.py",
 		Command: "sphinx-build -b html $PANCAKE_SOURCE $PANCAKE_ARTIFACT_DIR",
 	},
+	"react": {
+		Name:    "react",
+		Canary:  "package.json",
+		Command: "npm install && npm run build && cp -vLR $PANCAKE_SOURCE/build/* $PANCAKE_ARTIFACT_DIR/",
+	},
 }
 
 func gemfile(gem string) string {
