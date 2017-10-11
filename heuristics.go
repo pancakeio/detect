@@ -49,7 +49,12 @@ var StaticSites = map[string]*StaticSiteType{
 		Name:    "harp",
 		Canary:  "harp.json",
 		Command: "npm install && harp compile $PANCAKE_SOURCE $PANCAKE_ARTIFACT_DIR",
-	}
+	},
+	"node": {
+		Name:    "node",
+		Canary:  "package.json",
+		Command: "npm install && npm run build && cp -vLR $PANCAKE_SOURCE/build/* $PANCAKE_ARTIFACT_DIR/",
+	},
 }
 
 func gemfile(gem string) string {
